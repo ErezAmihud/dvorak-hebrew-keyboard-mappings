@@ -1,5 +1,7 @@
-# hebrew-dvorak
-For hardware keyboard that is mapped to dvorak (moonlander, ergodox, etc) for windows.
+Contains 2 mappings
+
+1. hd - hebrew dvorak - a mapping for hebrew with dvorak, with proper change of ctrl+key functionality to be like the english dvorak layout
+2. hw-hd - hardware hebrew dvorak - a mapping for hebrew with dvorak - again with the proper ctrl+key mappings
 
 It emulates the [hebrew-dvorak keyboard](https://heboard.wordpress.com/2012/03/30/%d7%a4%d7%a8%d7%99%d7%a9%d7%aa-%d7%9e%d7%a7%d7%9c%d7%93%d7%aa-dvorak-%d7%a2%d7%91%d7%a8%d7%99%d7%aa/) (not the normal hebrew)
 
