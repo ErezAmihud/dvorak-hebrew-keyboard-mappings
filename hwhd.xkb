@@ -1,0 +1,84 @@
+// Hebrew Dvorak (hardware) - XKB port of hwhd.klc for Linux.
+//
+// Meant for keyboards that already send Dvorak in hardware: the host sees QWERTY
+// keycodes, so each <ADxx>/<ACxx>/<ABxx> below is named after the QWERTY key
+// the host receives (same convention as the scancodes in hwhd.klc).
+//
+// Install as  <xkb dir>/symbols/hwhd  (see README.md), then select layout "hwhd".
+//
+// Levels (AltGr = Level3 = Windows Ctrl+Alt):
+//   Letters : Hebrew | Shift: Latin capital | AltGr: extras (euro, yiddish ligatures)
+//             CapsLock: Latin capital, CapsLock+Shift: Hebrew (ALPHABETIC behaviour)
+//   Number row, `, \, ;  : the 5th level is reached with CapsLock and holds niqqud,
+//             like the SGCap rows of hwhd.klc.
+
+default partial alphanumeric_keys
+xkb_symbols "basic" {
+    name[Group1] = "Hebrew (Dvorak, hardware)";
+
+    // Number row. Level5 (CapsLock) = niqqud.
+    // FOUR_LEVEL_PLUS_LOCK is the only stock type where Lock selects its own level
+    // instead of acting like Shift; the layout needs that for the niqqud layer.
+    key.type = "FOUR_LEVEL_PLUS_LOCK";
+    key <AE01> { [ 1,      exclam,      NoSymbol, NoSymbol, U05B1 ] };
+    key <AE02> { [ 2,      at,          NoSymbol, NoSymbol, U05B2 ] };
+    key <AE03> { [ 3,      numbersign,  NoSymbol, U200E,    U05B3 ] }; // AltGr+Shift = LRM
+    key <AE04> { [ 4,      dollar,      U20AA,    U200F,    U05B4 ] }; // AltGr = shekel, AltGr+Shift = RLM
+    key <AE05> { [ 5,      percent,     NoSymbol, NoSymbol, U05B5 ] };
+    key <AE06> { [ 6,      asciicircum, NoSymbol, NoSymbol, U05B6 ] };
+    key <AE07> { [ 7,      ampersand,   NoSymbol, NoSymbol, U05B7 ] };
+    key <AE08> { [ 8,      asterisk,    NoSymbol, NoSymbol, U05B8 ] };
+    key <AE09> { [ 9,      parenleft,   NoSymbol, NoSymbol, U05C2 ] };
+    key <AE10> { [ 0,      parenright,  NoSymbol, NoSymbol, U05C1 ] };
+    key <AE11> { [ minus,  underscore,  U05BF,    NoSymbol, U05B9 ] }; // AltGr = rafe
+    key <AE12> { [ equal,  plus,        NoSymbol, NoSymbol, U05BC ] };
+
+    key <TLDE> { [ semicolon,  asciitilde, NoSymbol, NoSymbol, U05B0 ] };
+    key <BKSL> { [ backslash,  bar,        NoSymbol, NoSymbol, U05BB ] };
+    // Zayin sits on the Dvorak ';' position; CapsLock restores the semicolon.
+    key <AC10> { [ U05D6,      colon,      NoSymbol, NoSymbol, semicolon ] };
+
+    // Plain punctuation.
+    key.type = "FOUR_LEVEL";
+    key <AD11> { [ bracketleft,  braceleft,  U200E ] }; // AltGr = LRM
+    key <AD12> { [ bracketright, braceright, U200F ] }; // AltGr = RLM
+    key <AC11> { [ apostrophe,   quotedbl ] };
+    key <AB08> { [ comma,        less ] };
+    key <AB09> { [ period,       greater ] };
+    key <AB10> { [ slash,        question ] };
+    key <LSGT> { [ backslash,    bar ] };
+
+    // Letters: Hebrew, Shift = Latin capital.
+    key.type = "ALPHABETIC";
+    key <AD01> { [ U05E1, Q ] };
+    key <AD02> { [ U05EA, W ] };
+    key <AD04> { [ U05DD, R ] };
+    key <AD05> { [ U05DC, T ] };
+    key <AD06> { [ U05D0, Y ] };
+    key <AD08> { [ U05E2, I ] };
+    key <AD09> { [ U05D3, O ] };
+    key <AD10> { [ U05E8, P ] };
+    key <AC01> { [ U05E9, A ] };
+    key <AC02> { [ U05E3, S ] };
+    key <AC03> { [ U05D9, D ] };
+    key <AC04> { [ U05D8, F ] };
+    key <AC05> { [ U05D5, G ] };
+    key <AC08> { [ U05D4, K ] };
+    key <AC09> { [ U05E4, L ] };
+    key <AB01> { [ U05DF, Z ] };
+    key <AB02> { [ U05E0, X ] };
+    key <AB03> { [ U05E7, C ] };
+    key <AB04> { [ U05E5, V ] };
+    key <AB05> { [ U05DE, B ] };
+    key <AB06> { [ U05DA, N ] };
+    key <AB07> { [ U05E6, M ] };
+
+    // Letters with an AltGr extra.
+    key.type = "FOUR_LEVEL_SEMIALPHABETIC";
+    key <AD03> { [ U05D2, E, EuroSign ] };
+    key <AD07> { [ U05DB, U, U05F0 ] }; // double vav
+    key <AC06> { [ U05D7, H, U05F2 ] }; // double yod
+    key <AC07> { [ U05D1, J, U05F1 ] }; // vav yod
+
+    include "level3(ralt_switch)"
+};
